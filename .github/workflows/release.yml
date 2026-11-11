@@ -28,11 +28,15 @@ jobs:
           if [ "$tag" != "$ext" ] || [ "$tag" != "$npm" ]; then
             echo "Tag $tag, extension $ext, companion $npm must all match"; exit 1
           fi
-      - name: Zip extension
-        run: cd packages/extension/dist && zip -r "../../../keyglow-extension-${GITHUB_REF_NAME#v}.zip" .
+      - name: Zip extensions
+        run: |
+          v="${GITHUB_REF_NAME#v}"
+          (cd packages/extension/dist && zip -r "../../../keyglow-extension-$v.zip" .)
+          (cd packages/extension/dist-firefox && zip -r "../../../keyglow-firefox-$v.zip" .)
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" "keyglow-extension-${GITHUB_REF_NAME#v}.zip" \
+          v="${GITHUB_REF_NAME#v}"
+          gh release create "$GITHUB_REF_NAME" "keyglow-extension-$v.zip" "keyglow-firefox-$v.zip" \
             --title "KeyGlow $GITHUB_REF_NAME" --generate-notes
