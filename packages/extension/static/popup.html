@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>KeyGlow</title>
+    <style>
+      body { font: 13px/1.4 system-ui, sans-serif; width: 280px; margin: 0; padding: 12px 14px; color: #1a1a1b; background: #fff; }
+      h1 { font-size: 15px; margin: 0 0 8px; }
+      p { margin: 6px 0; padding-left: 16px; position: relative; overflow-wrap: anywhere; }
+      p::before { content: ""; position: absolute; left: 0; top: 5px; width: 8px; height: 8px; border-radius: 50%; background: #9a9a9a; }
+      p[data-kind="ok"]::before { background: #2e9e3f; }
+      p[data-kind="bad"]::before { background: #c9372c; }
+      @media (prefers-color-scheme: dark) { body { color: #e8e8e8; background: #1f1f20; } }
+    </style>
+  </head>
+  <body>
+    <h1>KeyGlow</h1>
+    <p id="companion" data-kind="idle">Checking companion app…</p>
+    <p id="keyboard" data-kind="idle">Keyboard: checking…</p>
+    <p id="game" data-kind="idle">Game: checking…</p>
+    <script src="popup.js"></script>
+  </body>
+</html>

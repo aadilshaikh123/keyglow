@@ -1,0 +1,50 @@
+{
+  "name": "keyglow",
+  "version": "0.1.0",
+  "description": "Show Wordle key colours on your physical RGB keyboard. Companion app for the KeyGlow browser extension.",
+  "keywords": [
+    "wordle",
+    "rgb",
+    "keyboard",
+    "openrgb",
+    "per-key",
+    "lighting",
+    "browser-extension"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aadilshaikh123/keyglow.git",
+    "directory": "packages/companion"
+  },
+  "homepage": "https://github.com/aadilshaikh123/keyglow#readme",
+  "bugs": {
+    "url": "https://github.com/aadilshaikh123/keyglow/issues"
+  },
+  "type": "module",
+  "bin": {
+    "keyglow": "dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "typecheck": "tsc -p . --noEmit",
+    "test": "vitest run",
+    "prepublishOnly": "pnpm run typecheck && pnpm run test && pnpm run build"
+  },
+  "dependencies": {
+    "node-hid": "^3.4.0",
+    "openrgb-sdk": "^0.6.0"
+  },
+  "devDependencies": {
+    "@keyglow/protocol": "workspace:*",
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.24.0",
+    "vitest": "^2.1.0"
+  }
+}
