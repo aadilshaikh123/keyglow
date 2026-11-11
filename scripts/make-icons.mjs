@@ -34,7 +34,8 @@ function shade(x, y) {
   }
   return BG;
 }
-for (const size of [16, 32, 48, 128]) {
+const OUT = { 300: "../store/edge/logo-300.png" };
+for (const size of [16, 32, 48, 128, 300]) {
   const SS = 4, rgba = Buffer.alloc(size * size * 4);
   for (let py = 0; py < size; py++) for (let px = 0; px < size; px++) {
     let r = 0, g = 0, b = 0, a = 0;
@@ -45,6 +46,6 @@ for (const size of [16, 32, 48, 128]) {
     const i = (py * size + px) * 4;
     if (a) { rgba[i] = r / a; rgba[i + 1] = g / a; rgba[i + 2] = b / a; rgba[i + 3] = (255 * a) / (SS * SS); }
   }
-  writeFileSync(new URL(`../packages/extension/static/icons/icon-${size}.png`, import.meta.url), png(size, rgba));
+  writeFileSync(new URL(OUT[size] ?? `../packages/extension/static/icons/icon-${size}.png`, import.meta.url), png(size, rgba));
 }
 console.log("icons written");
